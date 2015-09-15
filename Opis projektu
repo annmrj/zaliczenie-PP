@@ -1,0 +1,14 @@
+Gra w życie, gdzie piksele zamienione są na trójkąty. 
+Kod przerobiony z opublikowanego na stronie openprocessing.org
+
+Mechanika: Kliknięcie myszką ożywia trójkąty, które przechodzą do koloru czerwonego (tu: śmierć) po 15 generacjach.
+Trójkąty mogą mieć trzy stany: spoczynku, przetrwania i narodzin.
+Kolory trójkątów i ich zmiany zależą od parametrów ustalonych na modelu kolorów HSB (hue, saturation, brightness).
+Każdy trójkąt ma trzech sąsiadów, są osobno zdefiniowani jako „prawy”, „lewy” i „w pionie”. 
+Trójkąty prostokątne są zwrócone do siebie dłuższymi bokami horyzontalnie, co przy zmianie kolorów daje wzór np. romba. 
+Kolory przechodzą między sąsiadującymi ze sobą trójkątami
+
+Szansa dla trójkąta na „bycie żywym” wynosi 50%. Losowane są cztery wartości (0,1,2,3). 
+Jeśli wynik wynosi 0 lub 3, oznacza to śmierć, trójkąt zmienia się na ciemno lub jasno czerwony, 
+2 to stan przetrwania lub śmierci, 2 to narodziny lub przetrwanie, inny wynik to stan przetrwania, starzenie się 
+(stopniowe zmienianie koloru).
