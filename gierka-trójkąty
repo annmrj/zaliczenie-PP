@@ -1,0 +1,56 @@
+//Cellular Automata / GameOfLife with triangles instead of pixels
+//an experiment by Joris Slob and Rick Companje (2009-08-07)
+ 
+//every triangle has 3 neighbours.
+//rules depending on the amount of living neighbours
+// 0 or 3: death
+// 1: survival
+// 2: birth
+ 
+int mx=60; //num triangles horizontal
+int my=60; //vertical
+int count=mx*my; //total
+ 
+Triangle triangles[] = new Triangle[count];
+ 
+void setup() {
+  size(600,600);
+  background(0);
+  colorMode(HSB,1); //możliwa zmiana na model RGB
+ 
+  //create all triangle objects
+  for (int x=0; x<mx; x++) {
+    for (int y=0; y<my; y++) {
+      triangles[y*mx+x] = new Triangle(x,y);
+    }
+  }
+ 
+  //define neighbours for all objects
+  for (int x=0; x<mx; x++) {
+    for (int y=0; y<my; y++) {
+      triangles[y*mx+x].neighbours[0] = triangles[(mx+x-1)%mx + y*mx]; //left neighbour
+      triangles[y*mx+x].neighbours[1] = triangles[(mx+x+1)%mx + y*mx]; //right neighbour
+      if (x%2==0) triangles[y*mx+x].neighbours[2] = triangles[(mx+x+1)%mx + ((my+y-1)%my)*mx]; //vertical neighbour
+      else triangles[y*mx+x].neighbours[2] = triangles[(mx+x-1)%mx + ((my+y+1)%my)*mx]; //vertical neighbour
+    }
+  }
+}
+ 
+void draw() { 
+  //flip display vertically
+  translate(-3,height);
+  scale(1,-1);
+   
+  //colors
+  stroke(0);
+  fill(.5); //5 5 1
+ 
+  //update and draw all triangles
+  for (int i=0; i<count; i++) triangles[i].update();
+  for (int i=0; i<count; i++) triangles[i].draw();
+}
+ 
+void mousePressed() {
+  //reset all triangles when mouse pressed
+  for (int i=0; i<count; i++) triangles[i].randomize();
+}
